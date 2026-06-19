@@ -7,7 +7,7 @@ if (!currentUserId) {
     localStorage.setItem("userId", currentUserId);
 }
 
-fetch(`https://itransition-task4-production.up.railway.app/api/login/users?userId=${currentUserId}`, {
+fetch(`https://itransition-task4-production.up.railway.app/users?userId=${currentUserId}`, {
     method: "GET"
 })
 .then(response => {
@@ -73,7 +73,7 @@ function blockSelected() {
             checkboxArray.push(parseInt(checkbox.dataset.id));
         }
     });
-    fetch("https://itransition-task4-production.up.railway.app/api/login/api/block", {
+    fetch("https://itransition-task4-production.up.railway.app/api/block", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({userId: parseInt(currentUserId), ids: checkboxArray})
@@ -88,7 +88,7 @@ function unblockSelected() {
             checkboxArray.push(parseInt(checkbox.dataset.id));
         }
     });
-    fetch("https://itransition-task4-production.up.railway.app/api/login/api/unblock", {
+    fetch("https://itransition-task4-production.up.railway.app/api/unblock", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({userId: parseInt(currentUserId), ids: checkboxArray})
@@ -103,7 +103,7 @@ function deleteSelected() {
             checkboxArray.push(parseInt(checkbox.dataset.id));
         }
     });
-    fetch("https://itransition-task4-production.up.railway.app/api/login/api/delete", {
+    fetch("https://itransition-task4-production.up.railway.app/api/delete", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({userId: parseInt(currentUserId), ids: checkboxArray})
@@ -112,7 +112,7 @@ function deleteSelected() {
 }
 
 function deleteUnverified() {
-    fetch("https://itransition-task4-production.up.railway.app/api/login/api/deleteUnverified", {
+    fetch("https://itransition-task4-production.up.railway.app/api/deleteUnverified", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({userId: parseInt(currentUserId), ids: []})
