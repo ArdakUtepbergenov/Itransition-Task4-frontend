@@ -4,7 +4,7 @@ function login(event){
     username = document.getElementById("username").value;
     password = document.getElementById("password").value;
 
-    fetch("http://localhost:5173/api/login", {
+    fetch("https://itransition-task4-production.up.railway.app/api/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username: username, password: password })
@@ -28,7 +28,7 @@ function register(event) {
     confirmPassword = document.getElementById("confirmPassword").value;
     email  = document.getElementById("email").value;
 
-    fetch("http://localhost:5173/api/register", {
+    fetch("https://itransition-task4-production.up.railway.app/api/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username: username, password: password, confirmPassword: confirmPassword, email: email})
