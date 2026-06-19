@@ -7,7 +7,7 @@ if (!currentUserId) {
     localStorage.setItem("userId", currentUserId);
 }
 
-fetch(`http://localhost:5173/users?userId=${currentUserId}`, {
+fetch(`https://itransition-task4-production.up.railway.app/api/login/users?userId=${currentUserId}`, {
     method: "GET"
 })
 .then(response => {
@@ -73,7 +73,7 @@ function blockSelected() {
             checkboxArray.push(parseInt(checkbox.dataset.id));
         }
     });
-    fetch("http://localhost:5173/api/block", {
+    fetch("https://itransition-task4-production.up.railway.app/api/login/api/block", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({userId: parseInt(currentUserId), ids: checkboxArray})
@@ -88,7 +88,7 @@ function unblockSelected() {
             checkboxArray.push(parseInt(checkbox.dataset.id));
         }
     });
-    fetch("http://localhost:5173/api/unblock", {
+    fetch("https://itransition-task4-production.up.railway.app/api/login/api/unblock", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({userId: parseInt(currentUserId), ids: checkboxArray})
@@ -103,7 +103,7 @@ function deleteSelected() {
             checkboxArray.push(parseInt(checkbox.dataset.id));
         }
     });
-    fetch("http://localhost:5173/api/delete", {
+    fetch("https://itransition-task4-production.up.railway.app/api/login/api/delete", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({userId: parseInt(currentUserId), ids: checkboxArray})
@@ -112,7 +112,7 @@ function deleteSelected() {
 }
 
 function deleteUnverified() {
-    fetch("http://localhost:5173/api/deleteUnverified", {
+    fetch("https://itransition-task4-production.up.railway.app/api/login/api/deleteUnverified", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({userId: parseInt(currentUserId), ids: []})
