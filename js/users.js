@@ -1,13 +1,13 @@
 let params = new URLSearchParams(window.location.search);
-let currentUserId = params.get("userId") || localStorage.getItem("userId");
+let currentSessionToken = params.get("sessionToken") || localStorage.getItem("sessionToken");
 
-if (!currentUserId) {
+if (!currentSessionToken) {
     window.location.href = "index.html";
 } else {
-    localStorage.setItem("userId", currentUserId);
+    localStorage.setItem("sessionToken", currentSessionToken);
 }
 
-fetch(`https://itransition-task4-production.up.railway.app/users?userId=${currentUserId}`, {
+fetch(`https://itransition-task4-production.up.railway.app/users?sessionToken=${currentSessionToken}`, {
     method: "GET"
 })
 .then(response => {
@@ -77,7 +77,7 @@ function blockSelected() {
     fetch("https://itransition-task4-production.up.railway.app/api/block", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({userId: parseInt(currentUserId), ids: checkboxArray})
+    body: JSON.stringify({sessionToken: currentSessionToken, ids: checkboxArray})
     })
     .then(() => location.reload());
 }
@@ -92,7 +92,7 @@ function unblockSelected() {
     fetch("https://itransition-task4-production.up.railway.app/api/unblock", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({userId: parseInt(currentUserId), ids: checkboxArray})
+    body: JSON.stringify({sessionToken: currentSessionToken, ids: checkboxArray})
     })
     .then(() => location.reload());
 }
@@ -107,7 +107,7 @@ function deleteSelected() {
     fetch("https://itransition-task4-production.up.railway.app/api/delete", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({userId: parseInt(currentUserId), ids: checkboxArray})
+    body: JSON.stringify({sessionToken: currentSessionToken, ids: checkboxArray})
     })
     .then(() => location.reload());
 }
@@ -116,7 +116,7 @@ function deleteUnverified() {
     fetch("https://itransition-task4-production.up.railway.app/api/deleteUnverified", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({userId: parseInt(currentUserId), ids: []})
+        body: JSON.stringify({sessionToken: currentSessionToken, ids: []})
     })
     .then(() => location.reload());
 }
