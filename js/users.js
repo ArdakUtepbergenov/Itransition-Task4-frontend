@@ -17,6 +17,7 @@ fetch(`https://itransition-task4-production.up.railway.app/users?userId=${curren
     return response.json();
 })
 .then(data => {
+    document.getElementById("mainContent").style.display = "block";
     data.forEach(user => {
         document.getElementById("usersTableBody").innerHTML += `<tr><td><input type="checkbox" class="rowCheckbox" data-id="${user.id}"></td><td>${user.id}</td><td>${user.username}</td><td>${user.email}</td><td>${user.status}</td><td>${timeAgo(user.lastLogin)}</td></tr>`;
     });
