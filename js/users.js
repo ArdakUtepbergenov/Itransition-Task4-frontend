@@ -35,7 +35,7 @@ function logout() {
 
 function timeAgo(dateString) {
     let now = new Date();
-    let past = new Date(dateString);
+    let past = new Date(dateString + "Z");
     let diffInSeconds = (now - past) / 1000;
     let diffInMinutes = diffInSeconds / 60;
     let diffInHours = diffInMinutes / 60;
