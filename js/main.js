@@ -6,13 +6,13 @@ function login(event){
     fetch("https://itransition-task4-production.up.railway.app/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ username: username, password: password })
     })
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            localStorage.setItem("sessionToken", data.sessionToken);
-            window.location.href = `users.html?sessionToken=${data.sessionToken}`;
+            window.location.href = "users.html";
         } else {
             alert("Неверный логин или пароль");
         }
@@ -29,17 +29,16 @@ function register(event) {
     fetch("https://itransition-task4-production.up.railway.app/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ username: username, password: password, confirmPassword: confirmPassword, email: email})
     })
     .then(response => response.json())
     .then(data => {
         if(data.success){
-            localStorage.setItem("sessionToken", data.sessionToken);
-            window.location.href = `users.html?sessionToken=${data.sessionToken}`;
+            window.location.href = "users.html";
         } else {
             alert(data.message);
         }
     })
 }
-
 
