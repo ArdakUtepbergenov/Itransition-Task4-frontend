@@ -1,14 +1,6 @@
-let params = new URLSearchParams(window.location.search);
-let currentSessionToken = params.get("sessionToken") || localStorage.getItem("sessionToken");
-
-if (!currentSessionToken) {
-    window.location.href = "index.html";
-} else {
-    localStorage.setItem("sessionToken", currentSessionToken);
-}
-
-fetch(`https://itransition-task4-production.up.railway.app/users?sessionToken=${currentSessionToken}`, {
-    method: "GET"
+fetch("https://itransition-task4-production.up.railway.app/users", {
+    method: "GET",
+    credentials: "include"
 })
 .then(response => {
     if (response.status === 401) {
@@ -29,8 +21,11 @@ fetch(`https://itransition-task4-production.up.railway.app/users?sessionToken=${
 })
 
 function logout() {
-    localStorage.clear();
-    window.location.href = "index.html";
+    fetch("https://itransition-task4-production.up.railway.app/api/logout", {
+        method: "POST",
+        credentials: "include",
+    })
+    .then(() => window.location.href = "index.html");
 }
 
 function timeAgo(dateString) {
@@ -77,7 +72,8 @@ function blockSelected() {
     fetch("https://itransition-task4-production.up.railway.app/api/block", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({sessionToken: currentSessionToken, ids: checkboxArray})
+    credentials: "include",
+    body: JSON.stringify(checkboxArray)
     })
     .then(() => location.reload());
 }
@@ -92,7 +88,8 @@ function unblockSelected() {
     fetch("https://itransition-task4-production.up.railway.app/api/unblock", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({sessionToken: currentSessionToken, ids: checkboxArray})
+    credentials: "include",
+    body: JSON.stringify(checkboxArray)
     })
     .then(() => location.reload());
 }
@@ -107,7 +104,8 @@ function deleteSelected() {
     fetch("https://itransition-task4-production.up.railway.app/api/delete", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({sessionToken: currentSessionToken, ids: checkboxArray})
+    credentials: "include",
+    body: JSON.stringify(checkboxArray)
     })
     .then(() => location.reload());
 }
@@ -115,8 +113,7 @@ function deleteSelected() {
 function deleteUnverified() {
     fetch("https://itransition-task4-production.up.railway.app/api/deleteUnverified", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({sessionToken: currentSessionToken, ids: []})
+        credentials: "include",
     })
     .then(() => location.reload());
 }
